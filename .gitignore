@@ -4,9 +4,9 @@
 .coverage
 .idea/
 .vscode/
-heatflow1d.egg-info/
+#heatflow1d.egg-info/
 build/
-dist/
+#dist/
 docs/build/
 venv/
 wheelhouse/

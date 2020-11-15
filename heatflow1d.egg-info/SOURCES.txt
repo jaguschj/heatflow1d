@@ -1,0 +1,10 @@
+LICENSE-APACHE
+LICENSE-MIT
+MANIFEST.in
+README.rst
+pyproject.toml
+setup.py
+heatflow1d.egg-info/PKG-INFO
+heatflow1d.egg-info/SOURCES.txt
+heatflow1d.egg-info/dependency_links.txt
+heatflow1d.egg-info/top_level.txt
