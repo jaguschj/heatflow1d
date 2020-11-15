@@ -25,11 +25,11 @@ kwargs = {
     'version': version,
     'description': '',
     'long_description': readme,
-    'author': 'U.N. Owen',
-    'author_email': 'me@un.known',
-    'maintainer': 'U.N. Owen',
-    'maintainer_email': 'me@un.known',
-    'url': 'https://github.com/_/heatflow1d',
+    'author': 'J. Jagusch',
+    'author_email': 'jaguschj@gmx.net',
+    'maintainer': 'J. Jagusch',
+    'maintainer_email': 'jaguschj@gmx.net',
+    'url': 'https://github.com/jaguschj/heatflow1d',
     'license': 'MIT/Apache-2.0',
     'classifiers': [
         'Development Status :: 4 - Beta',
@@ -52,6 +52,16 @@ kwargs = {
 
 #################### BEGIN USER OVERRIDES ####################
 # Add your customizations in this section.
+kwargs = {
+    'name': 'heatflow1d',
+    'version': version,
+    'description': '',
+    'long_description': readme,
+    'author': 'J. Jagusch',
+    'author_email': 'jaguschj@gmx.net',
+    'maintainer': 'J. Jagusch',
+    'maintainer_email': 'jaguschj@gmx.net',
+    'url': 'https://github.com/jaguschj/heatflow1d',}
 
 ###################### END USER OVERRIDES ####################
 
