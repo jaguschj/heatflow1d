@@ -449,12 +449,18 @@ class Temperature_field(object):
 #import dash
 #import dash_core_components as dcc
 #import dash_html_components as html
-from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
-from plotly import tools
 
-import plotly.graph_objs as go
+import plotly.graph_objects as go
+#import plotly.express as px
+from plotly.subplots import make_subplots
+
+
+#from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
+#from plotly import tools
+
+#import plotly.graph_objs as go
 #import plotly.plotly as py
-import plotly.figure_factory as ff
+#import plotly.figure_factory as ff
 
 
 def plot2d(time,x, temp_field,boundary_ix=[]):
@@ -513,7 +519,8 @@ def plot2d(time,x, temp_field,boundary_ix=[]):
               'layout': layout}
     #plot(fig1,filename='single.html')
     #layout_2=go.Layout()
-    plot(fig1,filename='heatmap.html')
+    #lot(fig1,filename='heatmap.html')
+    fig1.write_html('heatmap.html')
 
 
 def plot_section(belt):
@@ -534,7 +541,7 @@ def plot_section(belt):
                 y=['Layer','Material'],
                 z = [layer_colors,layer_colors],
                 text=[layer_names])
-    trace_lines=[]
+    trace_lines=[trace]
     for xpos,col in zip(layer_nodes,layer_colors):
         trace =go.Scatter(x=[xpos,xpos],
                           y=[0,1],
@@ -559,7 +566,9 @@ def plot_section(belt):
     #z = [layer_colors]
     #z_text=[layer_names]
     #fig = ff.create_annotated_heatmap(z, x=x, y=y, annotation_text=z_text, colorscale='Viridis')
-    plot(trace_lines,filename='layers.html')
+    #plot(trace_lines,filename='layers.html')
+    fig=go.Figure(trace_lines)
+    fig.write_html('layers.html')
 
     
 def plot2d_subplots(time,x, temp_field,boundary_ix=[],xcuts=[],tcuts=[]):
@@ -649,7 +658,7 @@ def plot2d_subplots(time,x, temp_field,boundary_ix=[],xcuts=[],tcuts=[]):
               'layout': layout}
     #plot(fig1,filename='single.html')
     #layout_2=go.Layout()
-    fig = tools.make_subplots(rows=2,cols=4,subplot_titles=('Temperature History','Temperature','Curing','Curing History'))
+    fig = make_subplots(rows=2,cols=4,subplot_titles=('Temperature History','Temperature','Curing','Curing History'))
     #
     fig.append_trace(trace_contour,2,2)
     fig.append_trace(trace_contour,2,3)
@@ -679,15 +688,17 @@ def plot2d_subplots(time,x, temp_field,boundary_ix=[],xcuts=[],tcuts=[]):
 #     fig.layout.update(layout_sub)
 #     
 # =============================================================================
-    plot(fig,filename='double.html')
+    fig.write_html('double.html')
+    #fig.show()
     
-    if 0:
+    
+    if 1:
         fig_all=go.Figure()
         fig_all.add_traces([trace_contour,trace_contour])
         
         fig_all.layout.update(layout)
         # nur ein Plot!
-        plot(fig_all,filename='double_all.html')
+        fig_all.write_html('double_all.html')
         
     #fig.add_trace()
     '''
@@ -733,7 +744,7 @@ def plot_fix_location(x,time,field,x_list):
             traces.append(trace)
         
     fig={'data': traces}#,  'layout': layout}
-    plot(fig,filename='heat_vs_time.html')
+    fig.write_html('heat_vs_time.html')
     
 def plot_fix_time(x,ltime,field,time_list):
     '''
@@ -768,7 +779,8 @@ def plot_fix_time(x,ltime,field,time_list):
             traces.append(trace)
         
     fig={'data': traces}#,  'layout': layout}
-    plot(fig,filename='heat_vs_location.html')
+    fig.show(filename='heat_vs_location.html')
+    #fig.write_html('heat_vs_location.html')
     
 def plot_mpl(time,x, temp_field):
     #import matplotlib.pyplot as plt
@@ -805,6 +817,8 @@ if __name__ =='__main__':
     plot_section(belt)
     plot_mpl(time,belt.x,temp)
     #plot2d(time,belt.x,temp,belt.layer_ix)
+    plot2d_subplots(time,belt.x,temp,belt.layer_ix)
+
     '''
     top.temperatures=[80,120,180,140]
     time,temp=belt.compute_temperature_field()
